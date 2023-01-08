@@ -1,3 +1,7 @@
 #!/usr/bin/python3
-def remove_char_at(str, n):
-    return (str[0:n] + str[n+1:] if n >= 0 else str)
+def magic_calculation(a, b, c):
+    if a < b:
+        return c
+    if c > b:
+        return a + b
+    return a * b - c

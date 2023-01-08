@@ -1,5 +1,3 @@
 #!/usr/bin/python3
-for a in range(122, 96, -1):
-    if a % 2 is 1:
-        a -= 32
-    print("{:c}".format(a), end="")
+def remove_char_at(str, n):
+    return (str[0:n] + str[n+1:] if n >= 0 else str)

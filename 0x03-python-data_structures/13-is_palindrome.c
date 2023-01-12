@@ -1,22 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 /**
- * is_palindrome - checks if palindrome
- * @head: head of node
- * Return: 0 if not, 1 if is
+ * palindrome_rec - Iterates through a list recursively
+ * @head: head of the list
+ * @tail: iterates to the end of the list
+ *
+ * Return: 1 if a palindrome, 0 if not a palindrome
  */
-int is_palindrome(listint_t **head)
-{
-	unsigned int len = 1;
-	listint_t *temp;
 
-	if (head == NULL|| *head == NULL)
+int palindrome_rec(listint_t **head, listint_t *tail)
+{
+	if (tail == NULL)
 		return (1);
 
-	temp = *head;
-	while (temp) /* get len of list */
+	if (palindrome_rec(head, tail->next) == 1 && (*head)->n == tail->n)
 	{
-		temp = temp->next;
-		len++;
+		(*head) = (*head)->next;
+		return (1);
 	}
-	return (0);
+
+	else
+		return (0);
+}
+
+
+/**
+ * is_palindrome - checks if linked list is a palindrome
+ * @head: head of the list
+ *
+ * Return: 1 if a palindrome, 0 if not a palindrome
+ */
+
+int is_palindrome(listint_t **head)
+{
+	if (*head == NULL)
+		return (1);
+
+	if ((*head)->next == NULL)
+		return (1);
+
+	return (palindrome_rec(head, *head));
 }

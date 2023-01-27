@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Documentation of Square class"""
+"""Documentation for Square class"""
 
 class Square():
-    """Square class attributes: NONE"""
-    pass
+	"""Square class attributes: NONE"""
+	pass

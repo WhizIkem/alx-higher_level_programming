@@ -1,6 +1,6 @@
 #!/usr/bin/python3
+"""Documentation of Square class"""
+
 class Square:
-    """A square class."""
-    def __init__(self):
-        """Initialization of the square class."""
-        pass
+    """Square class attributes: NONE"""
+    pass

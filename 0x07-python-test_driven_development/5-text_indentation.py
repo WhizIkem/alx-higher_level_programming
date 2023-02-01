@@ -1,4 +1,4 @@
-#!/usr/python3
+#!/usr/bin/python3
 """Defines a text-indentation function."""
 
 def text_indentation(text):

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ defines a matrix division function."""
 
-def matrix_division(matrix, div):
+def matrix_divided(matrix, div):
 	"""divide all elements of a matrix
 	args:
 		matrix (list): a list of lists of ints or floats.

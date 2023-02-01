@@ -14,32 +14,26 @@ def matrix_division(matrix, div):
 	Returns:
 		A new matrix representing the result of the division
 	"""
-if not type(div) in (int, float):
-	raise TypeError("div must be a number")
 
-if div == 0:
-	raise ZeroDivisionError("division by zero")
+mes0 = "matrix must be a matrix (list of lists) of integers/floats"
+mes1 = "Each row of the matrix must have the same size"
+res_matrix = []
 
-msg_type = "matrix must be a matrix (list of lists) of integers/floats"
+    if not isinstance(div, (int, float)):
+        raise TypeError("div must be a number")
 
-if not matrix or not isinstance(matrix, list):
-	raise TypeError(msg_type)
+    if div == 0:
+        raise ZeroDivisionError("division by zero")
 
-len_e = 0
-msg_size = "Each row of the matrix must have the same size"
+    for lists in matrix:
+        if len(lists) != len(matrix[0]):
+            raise TypeError(mes1)
+        inner_list = []
+        for items in lists:
+            if not isinstance(items, (int, float)):
+                raise TypeError(mes0)
+            else:
+                inner_list.append(round(items / div, 2))
+        res_matrix.append(inner_list)
 
-for elems in matrix:
-	if not elems or not isinstance(elems, list):
-		raise TypeError(msg_type)
-
-	if len_e != 0 and len(elems) != len_e:
-		raise TypeError(msg_size)
-
-	for num in elems:
-		if not type(num) in (int, float):
-			raise TypeError(msg_type)
-
-	len_e = len(elems)
-
-m = list(map(lambda x: list(map(lamba y: round(y / div, 2), x)), matrix))
-return (m)
+    return res_matrix

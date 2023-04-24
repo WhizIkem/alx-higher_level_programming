@@ -1,2 +1,2 @@
 #!/usr/bin/node
-myCar = 333;
+myVar = 333;

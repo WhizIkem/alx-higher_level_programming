@@ -1,15 +1,26 @@
 #!/usr/bin/python3
-"""script that lists all stattes with a name starting with N (upper N) from the database hbtn_0e_0_usa"""
-
-import sys
+""" Import the sys.arg """
 import MySQLdb
+import sys
 
 if __name__ == "__main__":
-    conn = MySQLdb.connect(host="localhost", port=3306, user=argv[1], passwd=argv[2], db=argv[3])
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM states WHERE name LIKE BINARY '^N' ORDER BY id ASC")
-    query_rows in cur.fetchall()
-    for row in query_rows:
-        print(row)
-    cur.close()
-    conn.close()
+    # Initializes method connect to the database
+    db = MySQLdb.connect(host="localhost",
+                         port=3306,
+                         user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3])
+    # Return the cursor
+    cursor = db.cursor()
+    # String with the query of mysql
+    query = "SELECT * FROM states WHERE name LIKE BINARY 'N%' ORDER BY id ASC;"
+    # Execute the query and return to the cursor
+    cursor.execute(query)
+    # Store the column of the tables
+    tables = cursor.fetchall()
+    # Print the column of the tables
+    for column in tables:
+        print(column)
+
+    cursor.close()
+    db.close()

@@ -1,23 +1,23 @@
 #!/usr/bin/python3
-"""
-script that prints the first State object from the database hbtn_0e_6_usa
-via SQLAlchemy
-"""
+"""Start link class to table in database"""
+
+import sys
+from model_state import Base, State
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import (create_engine)
+from model_state import Base, State
+
 if __name__ == "__main__":
-
-    from sys import argv
-    from model_state import Base, State
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import sessionmaker
-
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.
-                           format(argv[1], argv[2], argv[3]),
-                           pool_pre_ping=True)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2],
+                                   sys.argv[3]), pool_pre_ping=True)
+    Base.metadata.create_all(engine)
+    # generates new Session objects when called
     Session = sessionmaker(bind=engine)
-    session = Session()
-    try:
-        instance = session.query(State).first()
-        print("{}: {}".format(instance.id, instance.name))
-    except:
+    mySession = Session()
+    myquer = mySession.query(State).order_by(State.id).first()
+    # If table state is empty print nothing
+    if not myquer:
         print("Nothing")
-    session.close()
+    else:
+        print("{}: {}".format(myquer.id, myquer.name))

@@ -1,35 +1,23 @@
 #!/usr/bin/node
 
-import requests
+const request = require('request');
+const url = process.argv[2];
 
-# API URL
-api_url = "https://jsonplaceholder.typicode.com/todos"
+request.get(url, { json: true }, (error, response, body) => {
+  if (error) {
+    console.log(error);
+    return;
+  }
 
-# Send GET request to the API
-response = requests.get(api_url)
-
-# Check if the request was successful
-if response.status_code == 200:
-    todos = response.json()
-    users = {}
-
-    # Compute the number of completed tasks by user ID
-    for todo in todos:
-        if todo["completed"]:
-            user_id = todo["userId"]
-            if user_id in users:
-                users[user_id] += 1
-            else:
-                users[user_id] = 1
-
-    # Create a list of users with completed tasks
-    completed_users = [
-        {"userId": user_id, "completedTasks": count}
-        for user_id, count in users.items()
-    ]
-
-    # Print the result in JSON format
-    print(json.dumps(completed_users, indent=4))
-
-else:
-    print("Error: Failed to retrieve data from the API.")
+  const tasksCompleted = {};
+  body.forEach((todo) => {
+    if (todo.completed) {
+      if (!tasksCompleted[todo.userId]) {
+        tasksCompleted[todo.userId] = 1;
+      } else {
+        tasksCompleted[todo.userId] += 1;
+      }
+    }
+  });
+  console.log(tasksCompleted);
+});
